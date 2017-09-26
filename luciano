@@ -1,0 +1,55 @@
+#include<iostream>
+#include<cstdlib>
+ 
+using namespace std;
+ 
+struct nodo{
+ 
+    char a;//campo donde se almacenara el caracter
+    struct nodo *sgte;
+};
+ 
+typedef struct nodo *pila;
+ 
+/*---------------Funcion para Apilar un Caracter--------*/
+void apila(pila &p,const char a){
+ 
+    pila q=new (struct nodo) ;
+    q->a=a;
+    q->sgte=p;
+    p=q;
+ }
+ 
+/*------------- Funcion para Desapilar un elemento -----*/
+void desapila(pila &p){
+ 
+    int n=p->a;
+ 
+    pila q=p;
+    p=p->sgte;
+    delete(q);
+}
+ 
+ /*------Funcion que decidir si se apila o desapila----*/
+int recorrer(int e,char letra, pila &p){
+ 
+    const char a='x';
+ 
+    if(e==0&&letra=='a'){
+        apila(p,a);
+        return 0;
+        }
+ 
+        if(e==0&&letra=='b'){
+            desapila(p);
+            return 1;
+        }
+ 
+        if(e==1&&letra=='b'){
+            desapila(p);
+            return 1;
+        }
+ 
+    return 0;
+ }
+ 
